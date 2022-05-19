@@ -8,6 +8,7 @@ object Main extends IOApp {
 
   def run(args: List[String]):IO[ExitCode] = for {
     _ <- IO.println(s"You passed in ${args.length} arguments: $args")
+    _ <- IO.println(s"In hex these arguments are ${args.map(_.hex)}")
     _ <- IO.println("abstract nonsense ftw")
   } yield ExitCode.Success
 
