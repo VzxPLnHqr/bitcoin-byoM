@@ -3,8 +3,9 @@
  * for easy access and syntactic sugar
  */
 
- package object byom {
+ package byom {
 
+    // warning: this is unsafe if the string is not a valid hex string
     def convertHexToBytes(hexString: String): Array[Byte] = {
         val theBytes = BigInt.apply(hexString,16).mod(BigInt(2).pow(hexString.length*4)).toByteArray
         theBytes
@@ -32,5 +33,11 @@
         // decode a hexencoded String (may throw error if string not properly encoded)
         def unsafeHex2string: String = new String(convertHexToBytes(s))
         def unsafeHex2bytes: Array[Byte] = convertHexToBytes(s)
+    }
+
+    // for a tuple of BigInts, maps the first coordinate to x and second to y
+    implicit class tuplePointOps(pair: (BigInt, BigInt)) {
+        def x: BigInt = pair._1
+        def y: BigInt = pair._2
     }
  }
