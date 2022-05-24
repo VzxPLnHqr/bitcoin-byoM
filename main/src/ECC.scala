@@ -53,7 +53,7 @@ object Curve {
 
     }
 
-    def secp256k1M[F[_] : Monad] : Curve[F] = new Curve[F] {
+    class Secp256k1M[F[_] : Monad] extends Curve[F] {
         // Members declared in byom.ecc.Curve
         def G: F[this.CurvePoint] = 
             this.CurvePoint(
@@ -68,4 +68,6 @@ object Curve {
 
         def curveName: F[String] = "secp256k1".pure[F]
     }
+
+    def secp256k1M[F[_] : Monad]: Secp256k1M[F] = new Secp256k1M[F]
 }
